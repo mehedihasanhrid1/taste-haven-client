@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../assets/logo.png';
 import {BsFillMoonFill} from 'react-icons/bs';
+import { FaTimes, FaBars } from "react-icons/fa";
 import { CiLight } from 'react-icons/ci';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+    const [click, setClick] = useState(false);
+    const handleClick = () => setClick(!click);
+
   return (
     <div>
       <nav className="p-4 md:p-5 shadow flex items-center justify-between">
+        <div className="block lg:hidden">
+        <button onClick={handleClick}>
+          {click ? <FaTimes /> : <FaBars />}
+        </button>
+        </div>
         <div>
             <div className='flex items-center justify-center gap-1 md:gap-2'>
                 <img className='h-8 md:h-10 lg:h-12' src={Logo} alt="" />
@@ -14,9 +24,26 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             </div>
         </div>
         <div>
+            <ul className='text-lg font-medium hidden lg:flex items-center gap-5'>
+            <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : '')}>
+                <li className="">Home</li>
+              </NavLink>
+              <NavLink to="/addproduct" className={(navData) => (navData.isActive ? "active" : '')}>
+                <li className="">Add Product</li>
+              </NavLink>
+              <NavLink to="/cart" className={(navData) => (navData.isActive ? "active" : '')}>
+                <li className="">My Cart</li>
+              </NavLink>
+              <NavLink to="/contactus" className={(navData) => (navData.isActive ? "active" : '')}>
+                <li className="">Contact Us</li>
+              </NavLink>
+            </ul>
+        </div>
+        <div className='flex items-center gap-3'>
             <button onClick={toggleDarkMode} className='p-3 text-xl dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg dark:text-gray-100 hover:bg-gray-100 text-gray-700 dark:font-bold'>
             {isDarkMode ? <CiLight/> :<BsFillMoonFill/> }
-            </button>    
+            </button>
+            <button className='bg-[#289944] text-white px-5 md:px-6 md:text-lg py-2 hover:bg-[#248a3e] rounded-lg'>Login</button>    
         </div>
       </nav>
     </div>

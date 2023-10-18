@@ -8,6 +8,11 @@ import {
 import Root from './Root';
 import Home from './pages/Home';
 import Errorpage from './pages/Errorpage';
+import Addproduct from './pages/Addproduct';
+import Cart from './pages/Cart';
+import AuthProvider from './AuthProvider';
+import { HelmetProvider } from 'react-helmet-async';
+import Signup from './pages/Signup';
 
 const router = createBrowserRouter([
   {
@@ -19,12 +24,28 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home/>,
       },
+      {
+        path: "/addproduct",
+        element: <Addproduct/>,
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup/>,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <AuthProvider>
+    <HelmetProvider>
+    <RouterProvider router={router} />
+    </HelmetProvider>
+    </AuthProvider>
   </React.StrictMode>,
 )
