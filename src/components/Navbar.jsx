@@ -11,7 +11,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
   return (
     <div>
-      <nav className="p-4 md:p-5 shadow flex items-center justify-between">
+      <nav className="p-4 md:p-5 shadow flex items-center justify-between dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-700 dark:to-gray-900">
         <div className="block lg:hidden">
         <button onClick={handleClick}>
           {click ? <FaTimes /> : <FaBars />}
@@ -25,16 +25,16 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         </div>
         <div>
             <ul className='text-lg font-medium hidden lg:flex items-center gap-5'>
-            <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : '')}>
+            <NavLink to="/" className={(navData) => (navData.isActive ? "text-[#289944] border-b-2 border-[#289944] dark:text-[#FB9333] dark:border-[#FB9333]" : '')}>
                 <li className="">Home</li>
               </NavLink>
-              <NavLink to="/addproduct" className={(navData) => (navData.isActive ? "active" : '')}>
+              <NavLink to="/addproduct" className={(navData) => (navData.isActive ? "text-[#289944] border-b-2 border-[#289944] dark:text-[#FB9333] dark:border-[#FB9333]" : '')}>
                 <li className="">Add Product</li>
               </NavLink>
-              <NavLink to="/cart" className={(navData) => (navData.isActive ? "active" : '')}>
+              <NavLink to="/cart" className={(navData) => (navData.isActive ? "text-[#289944] border-b-2 border-[#289944] dark:text-[#FB9333] dark:border-[#FB9333]" : '')}>
                 <li className="">My Cart</li>
               </NavLink>
-              <NavLink to="/contactus" className={(navData) => (navData.isActive ? "active" : '')}>
+              <NavLink to="/contactus" className={(navData) => (navData.isActive ? "text-[#289944] border-b-2 border-[#289944] dark:text-[#FB9333] dark:border-[#FB9333]" : '')}>
                 <li className="">Contact Us</li>
               </NavLink>
             </ul>

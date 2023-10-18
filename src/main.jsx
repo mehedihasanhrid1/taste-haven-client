@@ -13,6 +13,7 @@ import Cart from './pages/Cart';
 import AuthProvider from './AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup/>,
+      },
+      {
+        path: "/login",
+        element:<Login/>,
       },
     ],
   },

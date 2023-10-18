@@ -26,7 +26,3 @@
     background-color: var(--clr-bg-light);
     color: var(--clr-text-dark);
   }
-  .active {
-    color: #289944; 
-    border-bottom: 2px solid #289944; 
-  }
