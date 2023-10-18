@@ -1,10 +1,18 @@
-import React from 'react';
-import { Outlet } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 export default function Root() {
+  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', isDarkMode);
+  }, [isDarkMode]);
+
   return (
-    <div>
-        <Outlet />
+    <div className={isDarkMode ? 'dark' : 'light'}>
+      <Navbar isDarkMode={isDarkMode} toggleDarkMode={() => setIsDarkMode(!isDarkMode)} />
+      <Outlet />
     </div>
-  )
-};
+  );
+}
