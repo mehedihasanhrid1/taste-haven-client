@@ -9,11 +9,12 @@ import Root from './Root';
 import Home from './pages/Home';
 import Errorpage from './pages/Errorpage';
 import Addproduct from './pages/Addproduct';
-import Cart from './pages/Cart';
+import Cart from './components/Cart';
 import AuthProvider from './AuthProvider';
 import { HelmetProvider } from 'react-helmet-async';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Contactus from './components/Contactus';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element:<Login/>,
+      },
+      {
+        path: "/contactus",
+        element:<Contactus/>,
       },
     ],
   },
