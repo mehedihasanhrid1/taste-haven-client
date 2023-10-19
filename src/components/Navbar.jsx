@@ -29,7 +29,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                   {user ? (
                     <p className='text-lg font-medium'>{user.displayName}</p>
                   ): (
-                    <p className='text-lg font-medium'>Please Login</p>
+                    <p className='text-lg font-medium'>Anonymous User</p>
                   )}
                   {user ? (
                     <p className='italic text-xs md:text-base'>{user.email}</p>

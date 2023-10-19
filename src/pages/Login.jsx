@@ -1,9 +1,39 @@
-import React from 'react';
+import React, { useContext , useState }  from "react";
 import { Helmet } from 'react-helmet-async';
 import SigninBanner from '../assets/signin.jpg'
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import { AuthContext } from '../AuthProvider';
+import { FaTimes } from "react-icons/fa";
 
 const Login = () => {
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState(null);
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      await signIn(email, password);
+      navigate('/');
+    } catch (error) {
+      setLoginError("Invalid email or password");
+      console.error("Sign-in failed:", error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/'); 
+    } catch (error) {
+      setLoginError("Signin with Google Failed");
+      console.error("Google Sign-in failed:", error.message);
+    }
+  };
+  
   return (
     <div>
       <Helmet>
@@ -23,7 +53,7 @@ const Login = () => {
               <h1 className="text-xl pt-3 text-center font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 lg:mb-8">
               Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
                 <div>
                   <label
                     htmlFor="email"
@@ -58,6 +88,19 @@ const Login = () => {
                   />
                 </div>
 
+                {loginError && (
+                  <div className="flex justify-start mt-3 ml-4 px-1">
+                    <ul>
+                      <li className="flex items-center py-1 gap-2 text-red-500">
+                      <span className="text-lg">
+                        <FaTimes />
+                        </span>
+                        <span>{loginError}</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   className="w-full text-white bg-[#289944] hover:bg-[#289144] font-medium rounded-lg px-5 py-2.5 text-center"
@@ -70,7 +113,7 @@ const Login = () => {
                   <hr className="h-[1.5px] bg-gray-400 border-none w-full" />
                 </div>
                 <div className="flex items-center justify-center gap-5">
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGoogleSignIn}>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
