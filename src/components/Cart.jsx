@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export default function Cart() {
 
@@ -6,6 +7,10 @@ export default function Cart() {
 
   return (
     <div className="p-4 px-3 md:px-10 lg:px-20 mx-auto my-8 lg:mt-16">
+      <Helmet>
+      <title>Proceed to Checkout - Taste Haven</title>
+      </Helmet>
+
       <div className="bg-white dark:bg-gray-950 shadow-lg rounded-lg">
         <div className="flex items-center justify-between px-4 md:px-8 py-3 md:py-6 bg-gray-200 dark:bg-slate-700 rounded-t-lg">
           <h1 className="text-lg md:text-xl lg:text-3xl font-bold">Shopping Cart</h1>

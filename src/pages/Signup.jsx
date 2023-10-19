@@ -1,11 +1,107 @@
-import React from "react";
+import React, { useContext , useState }  from "react";
 import { Helmet } from "react-helmet-async";
 import Banner from "../assets/signup.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../AuthProvider";
+import { FaTimes } from "react-icons/fa";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider , GithubAuthProvider , signOut } from 'firebase/auth';
 
 const Signup = () => {
+  const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [passwordError, setPasswordError] = useState(null);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  };
+
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const photoURL = e.target.photourl.value;
+
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long.");
+      return;
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      setPasswordError("Password must contain at least one capital letter.");
+      return;
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      setPasswordError("Password must contain at least one special character.");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCredential.user, {
+        displayName: name,
+        photoURL: photoURL,
+      });
+      handleSignOut();
+      toast.success("Signup successful!");
+      setTimeout(() => {
+        navigate('/login')
+      }, 4000);
+
+    } catch (error) {
+      console.error(error.message);
+      toast.error(`Signup failed.${error.message}`);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      toast.success('Signup with Google successful!');
+      handleSignOut();
+      navigate('/login');
+    } catch (error) {
+      console.error(error.message);
+      toast.error('Signup with Google failed. Please try again.');
+    }
+  };
+
+  const handleFacebookSignup = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      await signInWithPopup(auth, provider);
+      toast.success('Signup with Facebook successful!');
+      handleSignOut();
+      navigate('/login');
+    } catch (error) {
+      console.error(error.message);
+      toast.error('Signup with Facebook failed. Please try again.');
+    }
+  };
+
+  const handleGithubSignup = async () => {
+    try {
+      const provider = new GithubAuthProvider();
+      await signInWithPopup(auth, provider);
+      toast.success('Signup with Github successful!');
+      handleSignOut();
+      navigate('/login');
+    } catch (error) {
+      console.error(error.message);
+      toast.error('Signup with github failed. Please try again.');
+    }
+  };
+
   return (
     <div>
       <Helmet>
@@ -25,7 +121,7 @@ const Signup = () => {
               <h1 className="text-xl pt-3 text-center font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 lg:mb-8">
                 Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSignup}>
                 <div>
                   <label
                     htmlFor="name"
@@ -91,6 +187,19 @@ const Signup = () => {
                   />
                 </div>
 
+                {passwordError && (
+                  <div className="flex justify-start mt-3 ml-4 px-1">
+                    <ul>
+                      <li className="flex items-center py-1 gap-3 text-red-500">
+                        <span className="text-lg">
+                        <FaTimes />
+                        </span>
+                        <span className="text-sm md:text-base">{passwordError}</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   className="w-full text-white bg-[#289944] hover:bg-[#289144] font-medium rounded-lg px-5 py-2.5 text-center"
@@ -103,7 +212,7 @@ const Signup = () => {
                   <hr className="h-[1.5px] bg-gray-400 border-none w-full" />
                 </div>
                 <div className="flex items-center justify-center gap-5">
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"  onClick={handleGoogleSignup}>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +268,7 @@ const Signup = () => {
                       </g>
                     </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleFacebookSignup}>
                   <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 48 48" version="1.1">
         <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -173,7 +282,7 @@ const Signup = () => {
         </g>
     </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGithubSignup}>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
