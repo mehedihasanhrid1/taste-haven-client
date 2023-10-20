@@ -13,7 +13,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
   return (
     <div>
-      <nav className="py-4 px-2 md:p-5 shadow flex items-center justify-between dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-700 dark:to-gray-900">
+      <nav className="py-4 px-2 md:p-5 shadow flex items-center justify-between bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-700 dark:to-gray-900">
         <div className="block lg:hidden text-lg md:text-xl relative">
         <button onClick={handleClick}>
           {click ? <FaTimes /> : <FaBars />}
@@ -115,7 +115,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
             </button>
           ) : (
             <Link to="/login">
-              <button className='bg-[#289944] text-white px-4 md:px-6 md:text-lg py-2 hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover-bg-[#dd7614] rounded-lg'>
+              <button className=' text-white px-4 md:px-6 md:text-lg py-2 bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg'>
                 Login
               </button>
             </Link>
