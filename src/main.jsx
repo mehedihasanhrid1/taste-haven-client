@@ -15,6 +15,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Contactus from './components/Contactus';
+import PrivateRoute from './routes/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart/>,
+        element:<PrivateRoute><Cart/></PrivateRoute>,
       },
       {
         path: "/signup",

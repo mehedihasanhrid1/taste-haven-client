@@ -4,9 +4,15 @@ import SigninBanner from '../assets/signin.jpg'
 import { Link , useNavigate } from "react-router-dom";
 import { AuthContext } from '../AuthProvider';
 import { FaTimes } from "react-icons/fa";
+import { 
+  GoogleAuthProvider, 
+  FacebookAuthProvider,
+  GithubAuthProvider, 
+  signInWithPopup 
+} from 'firebase/auth';
 
 const Login = () => {
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn ,  auth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(null);
 
@@ -24,15 +30,46 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+
     try {
-      await signInWithGoogle();
-      navigate('/'); 
+      await signInWithPopup(auth, provider);
+
+      navigate('/');
     } catch (error) {
-      setLoginError("Signin with Google Failed");
-      console.error("Google Sign-in failed:", error.message);
+      console.error(error.message);
+  
+      setLoginError("Failed to sign in with Google");
     }
   };
+
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+
+    try {
+      await signInWithPopup(auth, provider);
+
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+      setLoginError("Failed to sign in with Github");
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    const provider = new GithubAuthProvider();
+
+    try {
+      await signInWithPopup(auth, provider);
+
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+      setLoginError("Failed to sign in with Github");
+    }
+  };
+
   
   return (
     <div>
@@ -113,7 +150,7 @@ const Login = () => {
                   <hr className="h-[1.5px] bg-gray-400 border-none w-full" />
                 </div>
                 <div className="flex items-center justify-center gap-5">
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGoogleSignIn}>
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGoogleLogin}>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +206,7 @@ const Login = () => {
                       </g>
                     </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleFacebookLogin}>
                   <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 48 48" version="1.1">
         <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -183,7 +220,7 @@ const Login = () => {
         </g>
     </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGithubLogin}>
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
