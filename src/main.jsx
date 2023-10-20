@@ -17,6 +17,7 @@ import Login from './pages/Login';
 import Contactus from './components/Contactus';
 import PrivateRoute from './routes/PrivateRoute';
 import { ThemeProvider } from '@material-tailwind/react';
+import Updateproduct from './pages/Updateproduct';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addproduct",
-        element: <Addproduct/>,
+        element:<PrivateRoute><Addproduct/></PrivateRoute>,
+      },
+      {
+        path: "/update",
+        element:<PrivateRoute><Updateproduct/></PrivateRoute>,
       },
       {
         path: "/cart",

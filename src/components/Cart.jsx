@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { FaBars } from 'react-icons/fa';
 
 export default function Cart() {
 
@@ -30,7 +31,7 @@ export default function Cart() {
                 className="text-gray-600 hover:text-red-500 text-xl lg:text-3xl font-bold p-2 mr-1 rounded-lg"
                 onClick={() => handleRemoveFromCart(index)}
               >
-                <ion-icon name="close-outline"></ion-icon>
+                <FaBars/>
               </button>
             </div>
           </div>

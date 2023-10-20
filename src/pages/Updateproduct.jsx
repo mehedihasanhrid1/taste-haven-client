@@ -1,11 +1,11 @@
 import React from 'react';
 
-function AddProduct() {
+function Updateproduct() {
   return (
     <section>
       <div className="py-8 px-5 lg:px-0 mx-auto max-w-2xl lg:pt-16 lg:pb-10">
       <h3 className="mb-6 lg:mb-8 text-center text-2xl lg:text-4xl font-bold dark:text-neutral-200">
-          Add a new<span className='text-[#FB9333] dark:text-[#289944]'>{" "}Product</span>
+          Update<span className='text-[#FB9333] dark:text-[#289944]'>{" "}Product</span>
         </h3>
         <form action="#">
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -99,7 +99,7 @@ function AddProduct() {
             type="submit"
             className="inline-flex items-center mt-4 sm:mt-6 font-medium py-3 px-5 lg:px-8  text-center rounded-lg bg-[#289944] sm:w-fit hover:bg-[#248a3e] focus:ring-2 focus:outline-none focus:ring-[#36cd5c]  dark:focus:ring-[#f99e48] text-white dark:bg-[#FB9333] dark:hover:bg-[#dd7614]"
           >
-            Add product
+            Submit
           </button>
         </form>
       </div>
@@ -107,4 +107,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default Updateproduct;
