@@ -4,7 +4,7 @@ import { SlSocialFacebook , SlSocialLinkedin , SlSocialYoutube , SlSocialTwitter
 
 export default function Footer() {
   return (
-    <div className='mt-5 lg:mt-10'>
+    <div className='md:mt-8 lg:mt-10'>
          <footer className="w-full bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-700 dark:to-gray-900 shadow">
          <div className="flex flex-col items-center justify-center gap-8 pt-12 md:pt-20 pb-5 md:pb-10">
          <div className='flex items-center justify-center gap-2 md:gap-3'>

@@ -16,6 +16,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Contactus from './components/Contactus';
 import PrivateRoute from './routes/PrivateRoute';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const router = createBrowserRouter([
   {
@@ -54,9 +55,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-    <HelmetProvider>
+      <ThemeProvider>
+      <HelmetProvider>
     <RouterProvider router={router} />
     </HelmetProvider>
+      </ThemeProvider>
     </AuthProvider>
   </React.StrictMode>,
 )
