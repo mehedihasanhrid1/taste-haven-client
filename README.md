@@ -2,7 +2,7 @@
 
 ## Website Link: [Click Here]()
 
-## Server Link: [Click Here]()
+## Server Link: [Click Here](https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app)
 
 ## Features
 

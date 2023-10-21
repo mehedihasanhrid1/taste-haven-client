@@ -22,7 +22,7 @@ function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/products/add', {
+      const response = await fetch('https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/products/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

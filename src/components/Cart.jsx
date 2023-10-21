@@ -11,7 +11,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/cart/items/${user.email}`);
+        const response = await fetch(`https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/cart/items/${user.email}`);
         if (response.ok) {
           const data = await response.json();
           setCartItems(data);
@@ -29,16 +29,14 @@ const Cart = () => {
 
   const handleRemoveFromCart = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:5000/cart/remove?userEmail=${user.email}&itemId=${itemId}`, {
+      const response = await fetch(`https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/cart/remove?userEmail=${user.email}&itemId=${itemId}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        // Filter out the removed item from the cart
+        
         const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
         setCartItems(updatedCartItems);
-
-        // Recalculate the total price
         calculateTotal(updatedCartItems);
       } else {
         console.error('Error removing item from the cart');
