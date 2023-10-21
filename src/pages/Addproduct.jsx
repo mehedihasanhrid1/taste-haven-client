@@ -48,10 +48,13 @@ function AddProduct() {
         });
 
           }, 3000);
-        } else {
+
+        } 
+        else {
           console.error('Invalid response from the server');
         }
-      } else {
+      } 
+      else {
         console.error('Request failed with status', response.status);
       }
     } 
@@ -60,6 +63,7 @@ function AddProduct() {
     }
 
   };
+
   return (
     <section>
       <div className="py-8 px-5 lg:px-0 mx-auto max-w-2xl lg:pt-16 lg:pb-10">
@@ -182,7 +186,7 @@ function AddProduct() {
           </button>
         </form>
       </div>
-      <ToastContainer autoClose={2000}/>
+      <ToastContainer position='top-left' autoClose={2000}/>
     </section>
   );
 }

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element:<PrivateRoute><Cart/></PrivateRoute>,
       },
       {
-        path: "/details",
+        path: "/details/:brandName",
         element: <Branddetails/>,
       },
       {

@@ -27,8 +27,8 @@ export default function Cards() {
     fetchData();
   }, []);
 
-  const handleSeeDetails = () => {
-    navigate(`/details`);
+  const handleSeeDetails = (brand) => {
+    navigate(`/details/${brand.brandname}`);
   };
 
   return (
@@ -42,7 +42,7 @@ export default function Cards() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {brands.map((brand, index) => (
             <Card
-              onClick={handleSeeDetails}
+            onClick={() => handleSeeDetails(brand)}
               className="cursor-pointer w-80 lg:w-96 bg-gray-200 dark:bg-[#253246] hover:scale-105 duration-500"
               key={index}
             >
