@@ -36,8 +36,14 @@ const router = createBrowserRouter([
         element:<PrivateRoute><Addproduct/></PrivateRoute>,
       },
       {
-        path: "/update",
+        path: "update-product/:product_id",
         element:<PrivateRoute><Updateproduct/></PrivateRoute>,
+        loader: async ({ params }) => {
+          const response = await fetch('http://localhost:5000/products');
+          const data = await response.json();
+          const updateProductData = data.find((item) => item._id === params.product_id);
+          return { data: updateProductData };
+        }
       },
       {
         path: "/cart",
@@ -49,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/product-details/:product_id',
-        element: <Productdetails/>,
+        element: <PrivateRoute><Productdetails/></PrivateRoute>,
         loader: async ({ params }) => {
           const response = await fetch('http://localhost:5000/products');
           const data = await response.json();

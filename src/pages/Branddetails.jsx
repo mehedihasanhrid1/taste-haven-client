@@ -51,8 +51,8 @@ const Branddetails = () => {
     navigate(`/product-details/${productId}`);
   };
 
-  const handleUpdateProductDetails = () => {
-    navigate(`/update`);
+  const handleUpdateProductDetails = (productId) => {
+    navigate(`/update-product/${productId}`);
   };
 
   const filteredProducts = products.filter((product) => product.brand_name === brandName);
@@ -110,7 +110,7 @@ const Branddetails = () => {
                 </Typography>
               </CardBody>
               <CardFooter className="pt-3 flex items-center justify-center gap-4">
-                <Button size="lg" fullWidth={true} className='capitalize text-base dark:bg-[#289944] dark:hover-bg-[#248a3e] bg-[#FB9333] hover-bg-[#dd7614]' onClick={handleUpdateProductDetails}>
+                <Button size="lg" fullWidth={true} className='capitalize text-base dark:bg-[#289944] dark:hover-bg-[#248a3e] bg-[#FB9333] hover-bg-[#dd7614]' onClick={() => handleUpdateProductDetails(product._id)}>
                   Update
                 </Button>
                 <Button size="lg" fullWidth={true} className='capitalize text-base bg-[#289944] hover-bg-[#248a3e] dark:bg-[#FB9333] dark:hover-bg-[#dd7614]' onClick={() => handleSeeProductDetails(product._id)}>
