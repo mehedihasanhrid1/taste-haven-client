@@ -19,7 +19,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           {click ? <FaTimes /> : <FaBars />}
         </button>
         {
-          click && <div className='absolute h-fit pb-8 pt-6 md:pt-8 rounded w-60 md:w-72 top-[51px] md:top-14 -left-2 md:-left-5 p-5 bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 dark:bg-gradient-to-t dark:from-gray-900 dark:via-gray-700 dark:to-gray-900'>
+          click && <div className='absolute h-fit z-50 pb-8 pt-6 md:pt-8 rounded w-60 md:w-72 top-[51px] md:top-14 -left-2 md:-left-5 p-5 bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 dark:bg-gradient-to-t dark:from-gray-900 dark:via-gray-700 dark:to-gray-900'>
           <div className='flex items-center justify-center flex-col'>
                   {user ? (
                     <img className='rounded-full h-12 w-12 md:h-14 md:w-14 mb-2' src={user.photoURL} alt='' />

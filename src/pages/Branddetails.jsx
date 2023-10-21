@@ -7,6 +7,8 @@ import { useNavigate , useParams } from 'react-router-dom';
 const Branddetails = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [sliderData, setSliderData] = useState([]);
+  const { brandName } = useParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,39 +27,51 @@ const Branddetails = () => {
     fetchProducts();
   }, []);
 
-  const handleSeeProductDetails = () => {
-    navigate(`/product-details`);
+
+  useEffect(() => {
+    const fetchSliderData = async () => {
+      try {
+        
+        const response = await fetch(`http://localhost:5000/sliders/${brandName}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setSliderData(data);
+      } catch (error) {
+        console.error('Error fetching slider data:', error);
+      }
+    };
+  
+    fetchSliderData();
+  }, [brandName]);
+  
+
+  const handleSeeProductDetails = (productId) => {
+    navigate(`/product-details/${productId}`);
   };
 
   const handleUpdateProductDetails = () => {
     navigate(`/update`);
   };
 
-  const { brandName } = useParams();
   const filteredProducts = products.filter((product) => product.brand_name === brandName);
 
 
   return (
     <div>
       <Helmet>
-        <title>Coca Cola - Ultimate Taste</title>
+        <title>See the details of Brand - Ultimate Taste</title>
       </Helmet>
       <Carousel autoplay={true} loop={true} navigation={() => null} prevArrow={() => null} nextArrow={() => null} className="h-72 md:h-96 lg:h-[32rem] w-full">
-      <img
-        src="https://i.ibb.co/6sTcGyL/th-11.jpg"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://i.ibb.co/xjLbmYV/th-10.png"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://i.ibb.co/hRKcGnk/th-7.jpg"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+      {sliderData.map((slider, index) => (
+          <img
+            key={index}
+            src={slider}
+            alt={`image ${index + 1}`}
+            className="h-full w-full object-cover"
+          />
+        ))}
       </Carousel>
       <div className='flex items-center justify-center flex-col py-10 lg:pt-16 px-6 md:px-10'>
         <h3 className="mb-8 lg:mb-10 text-center text-3xl lg:text-5xl font-bold dark:text-neutral-200">
@@ -99,7 +113,7 @@ const Branddetails = () => {
                 <Button size="lg" fullWidth={true} className='capitalize text-base dark:bg-[#289944] dark:hover-bg-[#248a3e] bg-[#FB9333] hover-bg-[#dd7614]' onClick={handleUpdateProductDetails}>
                   Update
                 </Button>
-                <Button size="lg" fullWidth={true} className='capitalize text-base bg-[#289944] hover-bg-[#248a3e] dark:bg-[#FB9333] dark:hover-bg-[#dd7614]' onClick={handleSeeProductDetails}>
+                <Button size="lg" fullWidth={true} className='capitalize text-base bg-[#289944] hover-bg-[#248a3e] dark:bg-[#FB9333] dark:hover-bg-[#dd7614]' onClick={() => handleSeeProductDetails(product._id)}>
                   Details
                 </Button>
               </CardFooter>

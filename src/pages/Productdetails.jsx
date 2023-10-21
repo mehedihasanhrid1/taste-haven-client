@@ -1,32 +1,55 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLoaderData } from "react-router-dom";
 import { AiFillStar } from 'react-icons/ai';
 import { BsFacebook, BsFillHeartFill, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Productdetails = () => {
+  const { data } = useLoaderData();
     const handleAddToCart = () => {
         toast.success("Added to cart successfully!");
       };
+
+      if (!data) {
+        return (
+          <div className='flex h-96 items-center justify-center text-4xl md:text-5xl'>
+            Product Not Aviable
+          </div>
+        );
+      }
+
+      const starRating = (rating) => {
+        const stars = [];
+        for (let i = 0; i < rating; i++) {
+          stars.push(
+            <div key={i} className="text-lg md:text-xl text-yellow-800">
+              <AiFillStar />
+            </div>
+          );
+        }
+        return stars;
+      };
+
     return (
         <div>
             <Helmet>
-                <title>See Details</title>
+                <title>{data.product_name} - {data.brand_name}</title>
             </Helmet>
             <section>
         <div className="container px-5 pt-10 pb-10 md:pb-5 lg:pt-14 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <img alt="" className="lg:w-1/2 w-full object-cover object-center rounded-lg border border-gray-200" src="https://i.ibb.co/PwKnBXq/th-9.jpg" />
+            <img alt="" className="lg:w-1/2 w-full object-cover object-center rounded-lg border border-gray-200" src={data.image}/>
             <div className="lg:w-1/2 w-full lg:pl-14 lg:py-6 mt-6 lg:mt-0">
-              <h2 className="text-xl lg:text-2xl font-semibold md:mt-3 mb-1 lg:mb-2 text-[#FB9333] dark:text-[#289944] tracking-widest">Soft Drinks</h2>
-              <h2 className="text-base lg:text-lg font-semibold mb-2 lg:mb-3 text-[#289944] dark:text-[#FB9333] tracking-widest">Drinks</h2>
-              <h1 className="text-2xl md:text-3xl title-font font-medium mb-3">Coca Cola</h1>
+              <h2 className="text-xl lg:text-2xl font-semibold md:mt-3 mb-1 lg:mb-2 text-[#FB9333] dark:text-[#289944] tracking-widest">{data.brand_name}</h2>
+              <h2 className="text-base lg:text-lg font-semibold mb-2 lg:mb-3 text-[#289944] dark:text-[#FB9333] tracking-widest">{data.product_category}</h2>
+              <h1 className="text-2xl md:text-3xl title-font font-medium mb-3">{data.product_name}</h1>
               <div className="flex mb-4">
                 <div className="flex items-center">
-                  <div className='text-lg md:text-xl text-yellow-800'>
-                  <AiFillStar />
+                  <div className='flex items-start gap-0.5 text-lg md:text-xl text-yellow-800'>
+                  {starRating(data.rating)}
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 ml-3">4 Reviews</p>
+                  <p className="text-gray-600 dark:text-gray-400 ml-3">8 Reviews</p>
                 </div>
                 <span className="flex items-center gap-3 ml-3 pl-3 pt-1 border-l-2 border-gray-200 text-2xl text-gray-700 dark:text-gray-200">
                   <a href=''>
@@ -40,9 +63,9 @@ const Productdetails = () => {
                   </a>
                 </span>
               </div>
-              <p className="leading-relaxed">description</p>
+              <p className="leading-relaxed">{data.description}</p>
               <div className="flex items-center mt-3 lg:mt-5">
-                <span className="title-font font-medium text-2xl lg:text-3xl">price</span>
+                <span className="title-font font-medium text-2xl lg:text-3xl">{`$${data.price}`}</span>
                 <button
                   onClick={handleAddToCart}
                   className="ml-auto text-white  border-0 py-2 px-6 focus:outline-none bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg lg:text-lg"

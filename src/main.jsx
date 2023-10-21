@@ -48,8 +48,14 @@ const router = createBrowserRouter([
         element: <Branddetails/>,
       },
       {
-        path: "/product-details",
+        path: '/product-details/:product_id',
         element: <Productdetails/>,
+        loader: async ({ params }) => {
+          const response = await fetch('http://localhost:5000/products');
+          const data = await response.json();
+          const productData = data.find((item) => item._id === params.product_id);
+          return { data: productData };
+        }
       },
       {
         path: "/signup",
