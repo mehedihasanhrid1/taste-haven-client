@@ -111,13 +111,13 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 logOut();
                 setClick(false);
               }}
-              className='bg-[#289944] text-white px-4 md:px-6 md:text-lg py-2 hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg'
+              className='bg-[#289944] text-white px-3 md:px-6 text-sm md:text-lg py-2 hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg'
             >
               Log Out
             </button>
           ) : (
             <Link to="/login">
-              <button className=' text-white px-4 md:px-6 md:text-lg py-2 bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg'>
+              <button className=' text-white px-4 text-sm md:px-6 md:text-lg py-2 bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg'>
                 Login
               </button>
             </Link>

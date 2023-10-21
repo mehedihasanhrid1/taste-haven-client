@@ -121,7 +121,7 @@ export default function Footer() {
           </div>
             </div>
             <div className=' bg-gray-200 dark:bg-gray-700 border-t border-gray-300'>
-            <p className="text-center md:text-lg py-4 md:py-6 lg:py-8">
+            <p className="text-center md:text-lg py-5 md:py-6 lg:py-8">
             © 2023 Taste Haven. All Rights Reserved.
           </p>
             </div>

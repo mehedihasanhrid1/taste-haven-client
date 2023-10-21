@@ -75,7 +75,7 @@ const Productdetails = () => {
                 <title>{data.product_name} - {data.brand_name}</title>
             </Helmet>
             <section>
-        <div className="container px-5 pt-10 pb-10 md:pb-5 lg:pt-14 mx-auto">
+        <div className="container px-6 pt-10 pb-10 md:pb-5 lg:pt-14 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img alt="" className="lg:w-1/2 w-full object-cover object-center rounded-lg border border-gray-200" src={data.image}/>
             <div className="lg:w-1/2 w-full lg:pl-14 lg:py-6 mt-6 lg:mt-0">
@@ -106,7 +106,7 @@ const Productdetails = () => {
                 <span className="title-font font-medium text-2xl lg:text-3xl">{`$${data.price}`}</span>
                 <button
                   onClick={handleAddToCart}
-                  className="ml-auto text-white  border-0 py-2 px-6 focus:outline-none bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg lg:text-lg"
+                  className="ml-auto mr-2 lg:mr-0 xl:mr-3 text-white  border-0 py-2 px-6 focus:outline-none bg-[#289944] hover:bg-[#248a3e] dark:bg-[#FB9333] dark:hover:bg-[#dd7614] rounded-lg lg:text-lg"
                 >
                   Add to Cart
                 </button>

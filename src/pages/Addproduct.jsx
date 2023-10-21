@@ -70,7 +70,7 @@ function AddProduct() {
       <Helmet>
         <title>Add a product on your Product Library</title>
       </Helmet>
-      <div className="py-8 px-5 lg:px-0 mx-auto max-w-2xl lg:pt-16 lg:pb-10">
+      <div className="py-10 px-6 lg:px-0 mx-auto max-w-2xl lg:pt-16 lg:pb-10">
         <h3 className="mb-6 lg:mb-8 text-center text-2xl lg:text-4xl font-bold dark:text-neutral-200">
           Add a new<span className='text-[#FB9333] dark:text-[#289944]'>{" "}Product</span>
         </h3>

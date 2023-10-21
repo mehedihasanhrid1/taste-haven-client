@@ -58,7 +58,7 @@ const Cart = () => {
   
 
   return (
-    <div className="p-4 px-3 md:px-10 lg:px-24 mx-auto my-8 lg:mt-16">
+    <div className="p-4 px-5 md:px-12 lg:px-24 mx-auto my-8 md:py-12 lg:mt-16">
       <Helmet>
         <title>{user.displayName}: Proceed to Checkout - Taste Haven</title>
       </Helmet>
@@ -83,8 +83,8 @@ const Cart = () => {
                   <img className="h-28 w-28 lg:h-40 lg:w-40 object-contain rounded-lg mr-4 lg:mr-6" src={item.productData.image} alt={item.productData.product_name} />
                   <div className="flex-1">
                     <h2 className="text-lg md:text-2xl lg:text-3xl font-bold mb-1 lg:mb-2">{item.productData.product_name}</h2>
-                    <h3 className="text-lg lg:text-2xl font-semibold mb-1 lg:mb-2">Brand: {item.productData.brand_name}</h3>
-                    <h3 className="lg:text-xl mb-1 lg:mb-2">Category: {item.productData.product_category}</h3>
+                    <h3 className="text-base md:text-lg lg:text-2xl font-semibold mb-1 lg:mb-2">Brand: {item.productData.brand_name}</h3>
+                    <h3 className="text-sm md:text-base lg:text-xl mb-1 lg:mb-2">Category: {item.productData.product_category}</h3>
                     <span className="text-lg lg:text-xl lg:mb-2 font-semibold">Price: ${item.productData.price}</span>
                   </div>
                   <button
