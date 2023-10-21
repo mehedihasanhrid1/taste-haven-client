@@ -58,10 +58,12 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         }
         </div>
         <div>
+            <Link to="/">
             <div className='flex items-center justify-center gap-1 md:gap-2'>
                 <img className='h-8 md:h-10 lg:h-12' src={Logo} alt="" />
                 <h2 className='text-[#289944] dark:text-white text-xl md:text-3xl  lg:text-4xl font-bold'>Taste<span className='text-[#FB9333]'>{" "}Haven</span></h2>
             </div>
+            </Link>
         </div>
         <div>
             <ul className='text-lg font-medium hidden lg:flex items-center gap-5'>
@@ -79,7 +81,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               </NavLink>
             </ul>
         </div>
-        <div className='flex items-center  gap-1 md:gap-3 lg:gap-4'>
+        <div className='flex items-center  gap-2 md:gap-3 lg:gap-4'>
         {user ? (
             <div className='hidden md:inline-block lg:hidden xl:inline-block'>
               <p className='text-lg font-medium'>{user.displayName}</p>

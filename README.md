@@ -1,4 +1,5 @@
 # Taste Haven: A Journey of Flavors
+Indulge your taste buds in a world of culinary delights at Taste Haven. From artisanal coffee to delectable pastries, and a curated selection of handcrafted dishes, our shop is a haven for food and beverage enthusiasts.
 
 ## Website Link: [Click Here](https://taste-haven-d0082.web.app/)
 

@@ -53,7 +53,7 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       console.error(error.message);
-      setLoginError("Failed to sign in with Github");
+      setLoginError("Failed to sign in with Facebook");
     }
   };
 
