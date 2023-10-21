@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -54,6 +55,9 @@ function Updateproduct() {
 
   return (
     <section>
+      <Helmet>
+        <title>Update product - {data.product_name}</title>
+      </Helmet>
       <div className="py-8 px-5 lg:px-0 mx-auto max-w-2xl lg:pt-16 lg:pb-10">
       <h3 className="mb-6 lg:mb-8 text-center text-2xl lg:text-4xl font-bold dark:text-neutral-200">
           Update<span className='text-[#FB9333] dark:text-[#289944]'>{" "}{data.product_name}</span>

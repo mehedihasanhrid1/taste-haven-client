@@ -1,15 +1,53 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLoaderData } from "react-router-dom";
 import { AiFillStar } from 'react-icons/ai';
 import { BsFacebook, BsFillHeartFill, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../AuthProvider';
 
 const Productdetails = () => {
   const { data } = useLoaderData();
-    const handleAddToCart = () => {
-        toast.success("Added to cart successfully!");
-      };
+  const { user } = useContext(AuthContext);
+  
+  const productFields = {
+    product_name: data.product_name,
+    image: data.image,
+    brand_name: data.brand_name,
+    product_category: data.product_category,
+    price: data.price,
+    rating: data.rating,
+    description: data.description,
+  };
+  
+  const handleAddToCart = async () => {
+    const cartData = {
+      userEmail: user.email, 
+      productData: productFields,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:5000/cart/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartData),
+      });
+  
+      if (response.ok) {
+        const responseText = await response.text();
+        toast.success(responseText);
+      } else {
+        const errorText = await response.text();
+        toast.error('Error adding the product to the cart');
+        console.error('Error adding the product to the cart:', errorText);
+      }
+    } catch (error) {
+      toast.error('Error adding the product to the cart');
+      console.error('Error adding the product to the cart:', error);
+    }
+  };
 
       if (!data) {
         return (

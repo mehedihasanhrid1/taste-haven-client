@@ -61,7 +61,7 @@ const Branddetails = () => {
   return (
     <div>
       <Helmet>
-        <title>See the details of Brand - Ultimate Taste</title>
+        <title>{brandName} - Choose your product</title>
       </Helmet>
       <Carousel autoplay={true} loop={true} navigation={() => null} prevArrow={() => null} nextArrow={() => null} className="h-72 md:h-96 lg:h-[32rem] w-full">
       {sliderData.map((slider, index) => (
