@@ -1,19 +1,20 @@
-import React, { useContext , useState }  from "react";
-import { Helmet } from 'react-helmet-async';
-import SigninBanner from '../assets/signin.jpg'
-import { Link , useNavigate } from "react-router-dom";
-import { AuthContext } from '../AuthProvider';
+import React, { useContext, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import SigninBanner from "../assets/signin.jpg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider";
 import { FaTimes } from "react-icons/fa";
-import { 
-  GoogleAuthProvider, 
+import {
+  GoogleAuthProvider,
   FacebookAuthProvider,
-  GithubAuthProvider, 
-  signInWithPopup 
-} from 'firebase/auth';
+  GithubAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const Login = () => {
-  const { signIn ,  auth } = useContext(AuthContext);
+  const { signIn, auth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [loginError, setLoginError] = useState(null);
 
   const handleSignIn = async (e) => {
@@ -23,7 +24,7 @@ const Login = () => {
 
     try {
       await signIn(email, password);
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       setLoginError("Invalid email or password");
       console.error("Sign-in failed:", error.message);
@@ -36,10 +37,10 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
 
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
-  
+
       setLoginError("Failed to sign in with Google");
     }
   };
@@ -50,7 +51,7 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
 
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
       setLoginError("Failed to sign in with Facebook");
@@ -63,18 +64,17 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
 
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
       setLoginError("Failed to sign in with Github");
     }
   };
 
-  
   return (
     <div>
       <Helmet>
-      <title>Sign In to Your Account</title>
+        <title>Sign In to Your Account</title>
       </Helmet>
       <section className="mt-6 lg:mt-10 lg:mx-8">
         <div className="flex md:gap-12 gap-16 items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -88,7 +88,7 @@ const Login = () => {
           <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl pt-3 text-center font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 lg:mb-8">
-              Sign in to your account
+                Sign in to your account
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
                 <div>
@@ -129,8 +129,8 @@ const Login = () => {
                   <div className="flex justify-start mt-3 ml-4 px-1">
                     <ul>
                       <li className="flex items-center py-1 gap-2 text-red-500">
-                      <span className="text-lg">
-                        <FaTimes />
+                        <span className="text-lg">
+                          <FaTimes />
                         </span>
                         <span>{loginError}</span>
                       </li>
@@ -150,7 +150,10 @@ const Login = () => {
                   <hr className="h-[1.5px] bg-gray-400 border-none w-full" />
                 </div>
                 <div className="flex items-center justify-center gap-5">
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGoogleLogin}>
+                  <button
+                    className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    onClick={handleGoogleLogin}
+                  >
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
@@ -206,21 +209,41 @@ const Login = () => {
                       </g>
                     </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleFacebookLogin}>
-                  <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 48 48" version="1.1">
-        <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-            <g id="Color-" transform="translate(-200.000000, -160.000000)" fill="#4460A0">
-                <path
-                    d="M225.638355,208 L202.649232,208 C201.185673,208 200,206.813592 200,205.350603 L200,162.649211 C200,161.18585 201.185859,160 202.649232,160 L245.350955,160 C246.813955,160 248,161.18585 248,162.649211 L248,205.350603 C248,206.813778 246.813769,208 245.350955,208 L233.119305,208 L233.119305,189.411755 L239.358521,189.411755 L240.292755,182.167586 L233.119305,182.167586 L233.119305,177.542641 C233.119305,175.445287 233.701712,174.01601 236.70929,174.01601 L240.545311,174.014333 L240.545311,167.535091 C239.881886,167.446808 237.604784,167.24957 234.955552,167.24957 C229.424834,167.24957 225.638355,170.625526 225.638355,176.825209 L225.638355,182.167586 L219.383122,182.167586 L219.383122,189.411755 L225.638355,189.411755 L225.638355,208 L225.638355,208 Z"
-                    id="Facebook">
-
-                </path>
-            </g>
-        </g>
-    </svg>
+                  <button
+                    className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    onClick={handleFacebookLogin}
+                  >
+                    <svg
+                      className="h-6 w-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 48 48"
+                      version="1.1"
+                    >
+                      <g
+                        id="Icons"
+                        stroke="none"
+                        strokeWidth="1"
+                        fill="none"
+                        fillRule="evenodd"
+                      >
+                        <g
+                          id="Color-"
+                          transform="translate(-200.000000, -160.000000)"
+                          fill="#4460A0"
+                        >
+                          <path
+                            d="M225.638355,208 L202.649232,208 C201.185673,208 200,206.813592 200,205.350603 L200,162.649211 C200,161.18585 201.185859,160 202.649232,160 L245.350955,160 C246.813955,160 248,161.18585 248,162.649211 L248,205.350603 C248,206.813778 246.813769,208 245.350955,208 L233.119305,208 L233.119305,189.411755 L239.358521,189.411755 L240.292755,182.167586 L233.119305,182.167586 L233.119305,177.542641 C233.119305,175.445287 233.701712,174.01601 236.70929,174.01601 L240.545311,174.014333 L240.545311,167.535091 C239.881886,167.446808 237.604784,167.24957 234.955552,167.24957 C229.424834,167.24957 225.638355,170.625526 225.638355,176.825209 L225.638355,182.167586 L219.383122,182.167586 L219.383122,189.411755 L225.638355,189.411755 L225.638355,208 L225.638355,208 Z"
+                            id="Facebook"
+                          ></path>
+                        </g>
+                      </g>
+                    </svg>
                   </button>
-                  <button className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={handleGithubLogin}>
+                  <button
+                    className="flex items-center bg-white border border-gray-100 rounded-lg shadow-md px-5 py-3  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    onClick={handleGithubLogin}
+                  >
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
@@ -263,10 +286,10 @@ const Login = () => {
                 </div>
               </form>
               <p className="font-light text-gray-700 text-center py-3">
-              Don’t have an account yet?{"  "}
+                Don’t have an account yet?{"  "}
                 <Link to="/signup">
                   <span className="font-medium inline text-[#289944] hover:underline">
-                  Sign Up
+                    Sign Up
                   </span>
                 </Link>
               </p>
