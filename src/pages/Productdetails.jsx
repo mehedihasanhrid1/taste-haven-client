@@ -40,12 +40,12 @@ const Productdetails = () => {
         toast.success(responseText);
       } else {
         const errorText = await response.text();
-        toast.error('Error adding the product to the cart');
-        console.error('Error adding the product to the cart:', errorText);
+        toast.error('Error adding the product.');
+        console.error('Error adding the product.:', errorText);
       }
     } catch (error) {
-      toast.error('Error adding the product to the cart');
-      console.error('Error adding the product to the cart:', error);
+      toast.error('Error adding the product.');
+      console.error('Error adding the product.:', error);
     }
   };
 
