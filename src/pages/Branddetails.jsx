@@ -13,7 +13,7 @@ const Branddetails = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/products');
+        const response = await fetch('http://localhost:5000/products');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -32,7 +32,7 @@ const Branddetails = () => {
     const fetchSliderData = async () => {
       try {
         
-        const response = await fetch(`https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/sliders/${brandName}`);
+        const response = await fetch(`http://localhost:5000/sliders/${brandName}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

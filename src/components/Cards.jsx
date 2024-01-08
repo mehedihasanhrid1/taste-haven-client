@@ -13,7 +13,7 @@ export default function Cards() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/brands");
+      const response = await fetch("http://localhost:5000/brands");
       if (response.ok) {
         const data = await response.json();
         setBrands(data);

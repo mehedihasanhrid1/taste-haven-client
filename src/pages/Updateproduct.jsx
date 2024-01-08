@@ -31,7 +31,7 @@ function Updateproduct() {
     };
 
     try {
-      const response = await fetch(`https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/products/update/${data._id}`, {
+      const response = await fetch(`http://localhost:5000/products/update/${data._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

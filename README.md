@@ -3,7 +3,7 @@ Indulge your taste buds in a world of culinary delights at Taste Haven. From art
 
 ## Website Link: [Click Here](https://taste-haven-d0082.web.app/)
 
-## Server Link: [Click Here](https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app)
+## Server Link: [Click Here](http://localhost:5000)
 
 ## Features
 

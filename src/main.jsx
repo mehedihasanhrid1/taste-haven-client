@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "update-product/:product_id",
         element:<PrivateRoute><Updateproduct/></PrivateRoute>,
         loader: async ({ params }) => {
-          const response = await fetch('https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/products');
+          const response = await fetch('http://localhost:5000/products');
           const data = await response.json();
           const updateProductData = data.find((item) => item._id === params.product_id);
           return { data: updateProductData };
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         path: '/product-details/:product_id',
         element: <PrivateRoute><Productdetails/></PrivateRoute>,
         loader: async ({ params }) => {
-          const response = await fetch('https://taste-haven-server-bu5qk0l5a-mehedi-hasans-hrid.vercel.app/products');
+          const response = await fetch('http://localhost:5000/products');
           const data = await response.json();
           const productData = data.find((item) => item._id === params.product_id);
           return { data: productData };
